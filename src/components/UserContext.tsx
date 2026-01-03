@@ -5,6 +5,7 @@ interface User {
   username: string;
   name: string;
   role: "ADMIN" | "USER";
+  accessToken: string;
 }
 
 function useUser() {
@@ -29,7 +30,7 @@ function useUser() {
 
       const data = await response.json();
 
-      const userData: User = data.user;
+      const userData: User = { ...data.user, accessToken: tokenStored };
 
       setUserData(userData);
     } catch (error) {

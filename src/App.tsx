@@ -3,6 +3,7 @@ import { LoginForm } from "./components/LoginForm";
 import { Nav } from "./components/Nav";
 import { RegisterForm } from "./components/RegisterForm";
 import { UserContext } from "./components/UserContext";
+import { MessageForm } from "./components/MessageForm";
 
 function App() {
   const userContext = useContext(UserContext);
@@ -14,7 +15,9 @@ function App() {
   return (
     <>
       <Nav />
-      {!userData && (
+      {userData ? (
+        <MessageForm />
+      ) : (
         <>
           <hr />
           <br />
