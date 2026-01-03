@@ -2,7 +2,11 @@ import { useState, useId, useContext } from "react";
 import { appFetch } from "../utils/appFetch";
 import { UserContext } from "./UserContext";
 
-function MessageForm() {
+interface MessageFormProps {
+  refreshMessages: () => Promise<void>;
+}
+
+function MessageForm({ refreshMessages }: MessageFormProps) {
   const userContext = useContext(UserContext);
   if (!userContext) {
     throw new Error("UserContext must be used within UserProvider");
@@ -21,10 +25,11 @@ function MessageForm() {
       });
 
       if (!response.ok) throw new Error("Error at sending message");
+
+      setMessageContent("");
+      await refreshMessages();
     } catch (error) {
       console.error(error);
-    } finally {
-      setMessageContent("");
     }
   }
 

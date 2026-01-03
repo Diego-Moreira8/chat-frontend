@@ -1,9 +1,9 @@
 import { useContext } from "react";
 import { LoginForm } from "./components/LoginForm";
+import { Messages } from "./components/Messages";
 import { Nav } from "./components/Nav";
 import { RegisterForm } from "./components/RegisterForm";
 import { UserContext } from "./components/UserContext";
-import { MessageForm } from "./components/MessageForm";
 
 function App() {
   const userContext = useContext(UserContext);
@@ -16,7 +16,7 @@ function App() {
     <>
       <Nav />
       {userData ? (
-        <MessageForm />
+        <Messages />
       ) : (
         <>
           <hr />
