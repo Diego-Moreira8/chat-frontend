@@ -27,7 +27,9 @@ function useUser() {
 
       if (!response.ok) throw new Error("Failed to authenticate");
 
-      const userData: User = await response.json();
+      const data = await response.json();
+
+      const userData: User = data.user;
 
       setUserData(userData);
     } catch (error) {

@@ -13,9 +13,12 @@ function Nav() {
       <b>Chat</b>
 
       {userData && (
-        <button onClick={handleLogOut} type="button">
-          Sair
-        </button>
+        <>
+          <span>Olá, {userData.name || userData.username}</span>
+          <button onClick={handleLogOut} type="button">
+            Sair
+          </button>
+        </>
       )}
     </header>
   );
