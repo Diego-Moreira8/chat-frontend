@@ -1,6 +1,8 @@
 import { useContext, useState, useId } from "react";
+import { FormInput } from "./FormInput";
 import { UserContext } from "./UserContext";
 import { appFetch } from "../utils/appFetch";
+import { Button } from "./Button";
 
 function RegisterForm() {
   const userContext = useContext(UserContext);
@@ -40,53 +42,59 @@ function RegisterForm() {
   }
 
   return (
-    <form
-      onSubmit={(e) => {
-        e.preventDefault();
-        handleRegistration();
-      }}
-    >
-      <input
-        onChange={(e) => setUsername(e.target.value)}
-        value={username}
-        type="text"
-        id={usernameInputId}
-        name="username"
-        placeholder="Usuário"
-        required
-      />
+    <>
+      <h1 className="text-lg font-bold italic">Criar Conta</h1>
 
-      <input
-        value={fullName}
-        onChange={(e) => setFullName(e.target.value)}
-        type="text"
-        id={fullNameInputId}
-        name="fullName"
-        placeholder="Nome Completo"
-      />
+      <form
+        onSubmit={(e) => {
+          e.preventDefault();
+          handleRegistration();
+        }}
+      >
+        <FormInput
+          changeHandler={setUsername}
+          value={username}
+          type="text"
+          required={true}
+          label="Nome de Usuário"
+          id={usernameInputId}
+          name="username"
+          placeholder="Usuário"
+        />
 
-      <input
-        onChange={(e) => setPassword(e.target.value)}
-        value={password}
-        type="password"
-        id={passwordInputId}
-        name="password"
-        placeholder="Senha"
-        required
-      />
+        <FormInput
+          changeHandler={setFullName}
+          value={fullName}
+          type="text"
+          label="Seu nome"
+          id={fullNameInputId}
+          name="fullName"
+          placeholder="Diego Moreira"
+        />
 
-      <input
-        onChange={(e) => setPasswordConfirmation(e.target.value)}
-        value={passwordConfirmation}
-        type="password"
-        id={pwConfirmationInputId}
-        name="passwordConfirmation"
-        placeholder="Confirme a senha"
-        required
-      />
+        <FormInput
+          changeHandler={setPassword}
+          value={password}
+          type="password"
+          required={true}
+          label="Senha"
+          id={passwordInputId}
+          name="password"
+        />
 
-      <button type="submit">Criar Conta</button>
-    </form>
+        <FormInput
+          changeHandler={setPasswordConfirmation}
+          value={passwordConfirmation}
+          type="password"
+          required={true}
+          label="Confirme a senha"
+          id={pwConfirmationInputId}
+          name="passwordConfirmation"
+        />
+
+        <Button type="submit">Criar Conta</Button>
+      </form>
+    </>
   );
 }
 

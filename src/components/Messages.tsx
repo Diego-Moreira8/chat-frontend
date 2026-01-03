@@ -46,10 +46,10 @@ function Messages() {
   }
 
   return (
-    <main>
+    <>
       <MessagesList messages={messages} />
       <MessageForm refreshMessages={refreshMessages} />
-    </main>
+    </>
   );
 }
 

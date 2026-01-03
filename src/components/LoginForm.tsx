@@ -1,5 +1,7 @@
 import { useContext, useState, useId } from "react";
+import { FormInput } from "./FormInput";
 import { UserContext } from "./UserContext";
+import { Button } from "./Button";
 
 function LoginForm() {
   const userContext = useContext(UserContext);
@@ -15,34 +17,40 @@ function LoginForm() {
   const passwordInputId = useId();
 
   return (
-    <form
-      onSubmit={(e) => {
-        e.preventDefault();
-        handleLogin(username, password);
-      }}
-    >
-      <input
-        onChange={(e) => setUsername(e.target.value)}
-        value={username}
-        type="text"
-        id={usernameInputId}
-        name="username"
-        placeholder="Usuário"
-        required
-      />
+    <>
+      <h1 className="text-lg font-bold italic">Entrar</h1>
 
-      <input
-        onChange={(e) => setPassword(e.target.value)}
-        value={password}
-        type="password"
-        id={passwordInputId}
-        name="password"
-        placeholder="Senha"
-        required
-      />
+      <form
+        className="mb-8"
+        onSubmit={(e) => {
+          e.preventDefault();
+          handleLogin(username, password);
+        }}
+      >
+        <FormInput
+          changeHandler={setUsername}
+          value={username}
+          type="text"
+          required={true}
+          label="Nome de Usuário"
+          id={usernameInputId}
+          name="username"
+          placeholder="SeuNome123"
+        />
 
-      <button type="submit">Entrar</button>
-    </form>
+        <FormInput
+          changeHandler={setPassword}
+          value={password}
+          type="password"
+          required={true}
+          label="Senha"
+          id={passwordInputId}
+          name="password"
+        />
+
+        <Button type="submit">Entrar</Button>
+      </form>
+    </>
   );
 }
 

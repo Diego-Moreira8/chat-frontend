@@ -1,7 +1,7 @@
 import { useContext, useEffect, useState } from "react";
 import { UserContext } from "./UserContext";
 
-function Nav() {
+function Header() {
   const userContext = useContext(UserContext);
   if (!userContext) {
     throw new Error("UserContext must be used within UserProvider");
@@ -42,8 +42,8 @@ function Nav() {
   }
 
   return (
-    <header>
-      <b>Chat</b>
+    <header className="bg-gray-800 px-4 py-2 text-white">
+      <span className="text-lg font-bold italic">Chat</span>
 
       {userData && (
         <>
@@ -64,4 +64,4 @@ function Nav() {
   );
 }
 
-export { Nav };
+export { Header };

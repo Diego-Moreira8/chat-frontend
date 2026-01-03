@@ -1,6 +1,6 @@
 import { useContext } from "react";
 import { Messages } from "./components/Messages";
-import { Nav } from "./components/Nav";
+import { Header } from "./components/Nav";
 import { UserContext } from "./components/UserContext";
 import { SignIn } from "./components/SignIn";
 
@@ -12,10 +12,10 @@ function App() {
   const { userData } = userContext;
 
   return (
-    <>
-      <Nav />
-      {userData ? <Messages /> : <SignIn />}
-    </>
+    <div className="min-h-screen">
+      <Header />
+      <main className="p-4">{userData ? <Messages /> : <SignIn />}</main>
+    </div>
   );
 }
 
