@@ -1,4 +1,4 @@
-import { useContext, useState } from "react";
+import { useContext, useState, useId } from "react";
 import { UserContext } from "./UserContext";
 
 function LoginForm() {
@@ -11,6 +11,9 @@ function LoginForm() {
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
 
+  const usernameInputId = useId();
+  const passwordInputId = useId();
+
   return (
     <form
       onSubmit={(e) => {
@@ -19,21 +22,23 @@ function LoginForm() {
       }}
     >
       <input
-        type="text"
-        name="username"
-        id="username"
-        placeholder="Usuário"
-        value={username}
         onChange={(e) => setUsername(e.target.value)}
+        value={username}
+        type="text"
+        id={usernameInputId}
+        name="username"
+        placeholder="Usuário"
+        required
       />
 
       <input
-        type="password"
-        name="password"
-        id="password"
-        placeholder="Senha"
-        value={password}
         onChange={(e) => setPassword(e.target.value)}
+        value={password}
+        type="password"
+        id={passwordInputId}
+        name="password"
+        placeholder="Senha"
+        required
       />
 
       <button type="submit">Entrar</button>

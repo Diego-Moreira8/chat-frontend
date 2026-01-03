@@ -1,6 +1,7 @@
 import { useContext } from "react";
 import { LoginForm } from "./components/LoginForm";
 import { Nav } from "./components/Nav";
+import { RegisterForm } from "./components/RegisterForm";
 import { UserContext } from "./components/UserContext";
 
 function App() {
@@ -13,7 +14,17 @@ function App() {
   return (
     <>
       <Nav />
-      {!userData && <LoginForm />}
+      {!userData && (
+        <>
+          <hr />
+          <br />
+          <LoginForm />
+          <br />
+          <hr />
+          <br />
+          <RegisterForm />
+        </>
+      )}
     </>
   );
 }
