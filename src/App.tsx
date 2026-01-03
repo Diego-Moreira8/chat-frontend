@@ -1,9 +1,8 @@
 import { useContext } from "react";
-import { LoginForm } from "./components/LoginForm";
 import { Messages } from "./components/Messages";
 import { Nav } from "./components/Nav";
-import { RegisterForm } from "./components/RegisterForm";
 import { UserContext } from "./components/UserContext";
+import { SignIn } from "./components/SignIn";
 
 function App() {
   const userContext = useContext(UserContext);
@@ -15,19 +14,7 @@ function App() {
   return (
     <>
       <Nav />
-      {userData ? (
-        <Messages />
-      ) : (
-        <>
-          <hr />
-          <br />
-          <LoginForm />
-          <br />
-          <hr />
-          <br />
-          <RegisterForm />
-        </>
-      )}
+      {userData ? <Messages /> : <SignIn />}
     </>
   );
 }
