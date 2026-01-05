@@ -49,6 +49,7 @@ function MessageForm({ refreshMessages }: MessageFormProps) {
         type="text"
         name="messageContent"
         id={messageContentInputId}
+        autoFocus
         required
       />
 
