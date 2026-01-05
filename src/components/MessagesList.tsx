@@ -1,8 +1,17 @@
+import { useEffect, useRef } from "react";
 import type { Message } from "./Messages";
 
 function MessagesList({ messages }: { messages: Message[] }) {
+  const messagesListRef = useRef<HTMLUListElement | null>(null);
+
+  useEffect(() => {
+    const msgsListRef = messagesListRef.current;
+    if (!msgsListRef) return;
+    msgsListRef.scrollTo(0, msgsListRef.scrollHeight);
+  }, [messages]);
+
   return (
-    <ul className="flex flex-col gap-2 overflow-auto">
+    <ul className="flex flex-col gap-2 overflow-auto" ref={messagesListRef}>
       {messages.map(({ message, user }) => {
         const createdAt = new Date(message.createdAt).toLocaleString();
 
