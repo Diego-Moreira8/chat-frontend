@@ -35,21 +35,29 @@ function MessageForm({ refreshMessages }: MessageFormProps) {
 
   return (
     <form
+      className="flex gap-1"
       onSubmit={(e) => {
         e.preventDefault();
         handleSubmit();
       }}
     >
       <input
+        className="grow rounded-full border px-4 py-1 placeholder:italic"
         onChange={(e) => setMessageContent(e.target.value)}
         value={messageContent}
+        placeholder="Digite uma mensagem"
         type="text"
         name="messageContent"
         id={messageContentInputId}
         required
       />
 
-      <button type="submit">Enviar</button>
+      <button
+        className="rounded-full bg-green-900 px-4 py-1 text-white"
+        type="submit"
+      >
+        Enviar
+      </button>
     </form>
   );
 }

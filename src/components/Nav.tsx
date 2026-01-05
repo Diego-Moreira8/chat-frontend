@@ -42,20 +42,22 @@ function Header() {
   }
 
   return (
-    <header className="bg-gray-800 px-4 py-2 text-white">
-      <span className="text-lg font-bold italic">Chat</span>
+    <header className="h-header-height flex items-center justify-between bg-gray-800 px-4 text-white">
+      <span className="text-xl font-bold italic">Chat</span>
 
       {userData && (
         <>
-          <span>Olá, {userData.name || userData.username}</span>
+          <span>{userData.name || userData.username}</span>
 
           {timeLeft !== null && (
-            <span>
-              Sessão expira em {timeLeft > 0 ? formatTime(timeLeft) : "0:00"}
-            </span>
+            <span>{timeLeft > 0 ? formatTime(timeLeft) : "0:00"}</span>
           )}
 
-          <button onClick={handleLogOut} type="button">
+          <button
+            className="rounded bg-red-900 px-4 py-1 text-white"
+            onClick={handleLogOut}
+            type="button"
+          >
             Sair
           </button>
         </>

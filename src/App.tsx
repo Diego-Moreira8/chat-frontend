@@ -12,9 +12,11 @@ function App() {
   const { userData } = userContext;
 
   return (
-    <div className="min-h-screen">
+    <div className="min-h-dvh overflow-hidden">
       <Header />
-      <main className="p-4">{userData ? <Messages /> : <SignIn />}</main>
+      <main className="h-[calc(100dvh-var(--spacing-header-height))] p-4">
+        {userData ? <Messages /> : <SignIn />}
+      </main>
     </div>
   );
 }

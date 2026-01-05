@@ -1,5 +1,9 @@
 @import "tailwindcss";
 
+@theme {
+  --spacing-header-height: 4rem;
+}
+
 @layer base {
   button {
     cursor: pointer;

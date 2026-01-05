@@ -46,10 +46,10 @@ function Messages() {
   }
 
   return (
-    <>
+    <div className="flex h-full flex-col gap-4">
       <MessagesList messages={messages} />
       <MessageForm refreshMessages={refreshMessages} />
-    </>
+    </div>
   );
 }
 
