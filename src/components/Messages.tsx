@@ -25,10 +25,6 @@ function Messages() {
 
   const [messages, setMessages] = useState<Message[]>([]);
 
-  useEffect(() => {
-    refreshMessages();
-  }, []);
-
   async function refreshMessages() {
     try {
       const response = await appFetch("/messages", {
@@ -44,6 +40,10 @@ function Messages() {
       console.error(error);
     }
   }
+
+  useEffect(() => {
+    refreshMessages();
+  }, []);
 
   return (
     <div className="flex h-full flex-col gap-4">

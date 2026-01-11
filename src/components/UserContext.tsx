@@ -1,4 +1,4 @@
-import { createContext, useEffect, useState, type ReactNode } from "react";
+import { createContext, useState, type ReactNode } from "react";
 import { appFetch } from "../utils/appFetch";
 
 interface User {
@@ -9,28 +9,31 @@ interface User {
 }
 
 function useUser() {
-  const [userData, setUserData] = useState<User | null>(null);
+  const ACCESS_TOKEN = "accessToken";
+  const [userData, setUserData] = useState<User | null | undefined>(undefined);
 
-  useEffect(() => {
-    checkAuthentication();
-  }, []);
-
-  async function checkAuthentication() {
+  async function validateAccessToken() {
     try {
-      const tokenStored = localStorage.getItem("accessToken");
-      if (!tokenStored) return handleLogOut();
+      const storedToken = localStorage.getItem(ACCESS_TOKEN);
+      if (!storedToken) {
+        handleLogOut();
+        return;
+      }
 
       const response = await appFetch("/users/me", {
-        accessToken: tokenStored,
+        accessToken: storedToken,
       });
 
-      if (response.status === 401) return handleLogOut();
+      if (response.status === 401) {
+        handleLogOut();
+        return;
+      }
 
       if (!response.ok) throw new Error("Failed to authenticate");
 
       const data = await response.json();
 
-      const userData: User = { ...data.user, accessToken: tokenStored };
+      const userData: User = { ...data.user, accessToken: storedToken };
 
       setUserData(userData);
     } catch (error) {
@@ -54,28 +57,36 @@ function useUser() {
 
       const token = data.token;
 
-      localStorage.setItem("accessToken", token);
+      localStorage.setItem(ACCESS_TOKEN, token);
 
-      await checkAuthentication();
+      await validateAccessToken();
     } catch (error) {
       console.error(error);
     }
   }
 
   function handleLogOut() {
-    localStorage.removeItem("accessToken");
+    localStorage.removeItem(ACCESS_TOKEN);
     setUserData(null);
   }
 
-  return { userData, handleLogin, handleLogOut };
+  return {
+    userData,
+    validateAccessToken,
+    handleLogin,
+    handleLogOut,
+  };
 }
 
 const UserContext = createContext<ReturnType<typeof useUser> | null>(null);
 
 function UserProvider({ children }: { children: ReactNode }) {
-  const { userData, handleLogin, handleLogOut } = useUser();
+  const { userData, validateAccessToken, handleLogin, handleLogOut } =
+    useUser();
   return (
-    <UserContext value={{ userData, handleLogin, handleLogOut }}>
+    <UserContext
+      value={{ userData, validateAccessToken, handleLogin, handleLogOut }}
+    >
       {children}
     </UserContext>
   );
